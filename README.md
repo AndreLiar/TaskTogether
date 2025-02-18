@@ -1,5 +1,4 @@
 # TaskTogether
-Here's a simple and clear **README.md** content for your **TaskTogether** project:
 
 ---
 
