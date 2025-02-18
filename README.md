@@ -34,9 +34,7 @@ Here's a simple and clear **README.md** content for your **TaskTogether** projec
 
 ## 🎯 Roadmap  
 ✅ MVP (Minimum Viable Product) Ready  
-📌 Add file sharing feature  
 📌 Improve UI/UX for chat & video calls  
-📌 Enhance analytics dashboard  
 
 ---
 
