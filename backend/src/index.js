@@ -44,6 +44,14 @@ app.use(cors());
 
 app.use(express.json());
 
+  // ✅ Default Public Endpoint (Health Check)
+app.get("/", (req, res) => {
+    res.status(200).json({
+      message: "🚀 TaskTogether Backend is Running!",
+      status: "success",
+      timestamp: new Date().toISOString(),
+    });
+  });
   
 // ✅ Load Swagger **before defining routes**
 setupSwagger(app);
