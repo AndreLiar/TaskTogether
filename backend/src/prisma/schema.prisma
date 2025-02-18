@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String          @id @default(uuid())
+  name               String
+  email              String          @unique
+  password           String
+  createdAt          DateTime        @default(now())
+  // Projects the user owns
+  projectsOwned      Project[]       @relation("ProjectOwner")
+  // Projects where the user is a member
+  projectMemberships ProjectMember[]
+  // Other relations
+  Task               Task[]
+  Message            Message[]
+  VideoCall          VideoCall[]
+  Role               Role?           @relation(fields: [roleId], references: [id])
+  roleId             String?
+}
+
+model Project {
+  id          String          @id @default(uuid())
+  name        String
+  description String?
+  ownerId     String
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  // Owner relation
+  owner       User            @relation("ProjectOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  // Members of this project (join table)
+  members     ProjectMember[]
+  // Other relations
+  Task        Task[]
+  Message     Message[]
+  VideoCall   VideoCall[]
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  status      String   @default("TODO")
+  projectId   String
+  assigneeId  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  assignee    User?    @relation(fields: [assigneeId], references: [id])
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  content   String
+  senderId  String
+  projectId String
+  createdAt DateTime @default(now())
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  sender    User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
+}
+
+model VideoCall {
+  id        String   @id @default(uuid())
+  projectId String
+  hostId    String
+  roomUrl   String
+  createdAt DateTime @default(now())
+  host      User     @relation(fields: [hostId], references: [id], onDelete: Cascade)
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Role {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
+}
+
+// New join model to link users and projects
+model ProjectMember {
+  projectId String
+  userId    String
+  role      String? // e.g., "admin", "member"
+  createdAt DateTime @default(now())
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([projectId, userId])
+}
