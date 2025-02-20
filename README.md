@@ -1,9 +1,9 @@
-# TaskTogether
+# TaskTogether 🏗️🚀  
+
+## **TaskTogether**
+TaskTogether is a **remote team collaboration** platform designed to streamline project management, team communication, and real-time video conferencing. Built with a robust **backend (Node.js, Express, PostgreSQL, Prisma)** and a dynamic **frontend (React, TypeScript)**, it empowers teams to work efficiently from anywhere.
 
 ---
-
-# TaskTogether 🏗️🚀  
-**TaskTogether** is a **remote team collaboration** platform designed to streamline project management, team communication, and real-time video conferencing. Built with a robust **backend (Node.js, Express, PostgreSQL, Prisma)** and a dynamic **frontend (React, TypeScript)**, it empowers teams to work efficiently from anywhere.
 
 ## 🌟 Features  
 ✔ **Project Management** – Create, update, and manage projects  
@@ -29,6 +29,73 @@
 - Socket.io (for real-time communication)  
 - JWT authentication  
 - DigitalOcean App Platform for deployment  
+
+---
+
+## 🔧 Installation & Setup  
+
+### **1. Clone the repository**
+```bash
+ git clone https://github.com/AndreLiar/TaskTogether.git
+ cd TaskTogether
+```
+
+### **2. Backend Setup**
+1. Install dependencies:
+   ```bash
+   cd backend
+   npm install
+   ```
+2. Set up environment variables:
+   - Copy `.env.example` to `.env`
+   - Update the database URL as needed:
+     ```
+     DATABASE_URL=postgresql://your_user:your_password@localhost:5432/remote_collab
+     ```
+3. Run migrations and seed the database:
+   ```bash
+   npx prisma migrate dev
+   npx prisma db seed
+   ```
+4. Start the backend server:
+   ```bash
+   npm run dev
+   ```
+
+### **3. Frontend Setup**
+1. Install dependencies:
+   ```bash
+   cd ../frontend
+   npm install
+   ```
+2. Start the frontend server:
+   ```bash
+   npm start
+   ```
+
+---
+
+## 🗄️ Database Setup & Restoration
+
+A database dump (`remote_collab_backup.dump`) is available in the **backend** folder. Follow these steps to restore it on your machine:
+
+### **1. Create a New PostgreSQL Database**
+Ensure PostgreSQL is installed, then create a database:
+```bash
+createdb -U your_user -h localhost -p 5432 remote_collab
+```
+
+### **2. Restore the Database**
+```bash
+pg_restore -U your_user -h localhost -p 5432 -d remote_collab -C -F c backend/remote_collab_backup.dump
+```
+
+### **3. Update Environment Variables**
+Edit the `.env` file in the `backend` folder with your database credentials:
+```env
+DATABASE_URL=postgresql://your_user:your_password@localhost:5432/remote_collab
+```
+
 ---
 
 ## 🎯 Roadmap  
@@ -56,9 +123,9 @@ This project is licensed under the **MIT License**.
 ## 📧 Contact  
 💬 **Developed by:** Andre Yvan Laurel Kanmegne Tabouguie  
 📌 **GitHub:** [AndreLiar](https://github.com/AndreLiar)  
-📌 **Email:** andrelaurelyvan.kanmegnetabouguie@ynov.com
+📌 **Email:** andrelaurelyvan.kanmegnetabouguie@ynov.com  
   
-
-🚀 **Let's build something amazing together!** 🚀
+🚀 **Let's build something amazing together!** 🚀  
 
 ---
+
