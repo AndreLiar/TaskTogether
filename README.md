@@ -43,8 +43,9 @@ TaskTogether is a **remote team collaboration** platform designed to streamline 
 ### **2. Backend Setup**
 1. Install dependencies:
    ```bash
-   cd backend
+   cd backend/src
    npm install
+   npm run dev
    ```
 2. Set up environment variables: 
    - Copy `.env.example` to `.env`
@@ -65,8 +66,9 @@ TaskTogether is a **remote team collaboration** platform designed to streamline 
 ### **3. Frontend Setup**
 1. Install dependencies:
    ```bash
-   cd ../frontend
+   cd frontend
    npm install
+   npm run dev
    ```
 2. Start the frontend server:
    ```bash
